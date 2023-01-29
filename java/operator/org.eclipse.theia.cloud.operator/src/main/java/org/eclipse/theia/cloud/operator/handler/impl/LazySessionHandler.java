@@ -409,7 +409,7 @@ public class LazySessionHandler implements SessionHandler {
 
 	    ServiceBackendPort appServerServiceBackendPort = new ServiceBackendPort();
 	    appServerServiceBackend.setPort(appServerServiceBackendPort);
-	    appServerServiceBackendPort.setNumber(appDefinition.getSpec().getPort());
+	    appServerServiceBackendPort.setNumber(appDefinition.getSpec().getAppServerPort());
 	});
 	return host + path + "/";
     }
