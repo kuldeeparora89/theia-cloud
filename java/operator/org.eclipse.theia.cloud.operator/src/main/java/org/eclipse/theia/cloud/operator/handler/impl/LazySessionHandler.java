@@ -125,7 +125,8 @@ public class LazySessionHandler implements SessionHandler {
 	}
 
 	Optional<Service> serviceToUse = createAndApplyService(correlationId, sessionResourceName, sessionResourceUID,
-		session, appDefinition.getSpec().getPort(), arguments.isUseKeycloak());
+		session, appDefinition.getSpec().getPort(), appDefinition.getSpec().getAppServerPort(),
+		arguments.isUseKeycloak());
 	if (serviceToUse.isEmpty()) {
 	    LOGGER.error(formatLogMessage(correlationId, "Unable to create service for session " + sessionSpec));
 	    return false;
@@ -259,9 +260,9 @@ public class LazySessionHandler implements SessionHandler {
     }
 
     protected Optional<Service> createAndApplyService(String correlationId, String sessionResourceName,
-	    String sessionResourceUID, Session session, int port, boolean useOAuth2Proxy) {
+	    String sessionResourceUID, Session session, int port, int appServerPort, boolean useOAuth2Proxy) {
 	Map<String, String> replacements = TheiaCloudServiceUtil.getServiceReplacements(client.namespace(), session,
-		port);
+		port, appServerPort);
 	String templateYaml = useOAuth2Proxy ? AddedHandlerUtil.TEMPLATE_SERVICE_YAML
 		: AddedHandlerUtil.TEMPLATE_SERVICE_WITHOUT_AOUTH2_PROXY_YAML;
 	String serviceYaml;
@@ -393,6 +394,22 @@ public class LazySessionHandler implements SessionHandler {
 	    ServiceBackendPort serviceBackendPort = new ServiceBackendPort();
 	    ingressServiceBackend.setPort(serviceBackendPort);
 	    serviceBackendPort.setNumber(appDefinition.getSpec().getPort());
+
+	    HTTPIngressPath appServerIngressPath = new HTTPIngressPath();
+	    http.getPaths().add(appServerIngressPath);
+	    appServerIngressPath.setPath(path + AddedHandlerUtil.APPSERVER_REWRITE_PATH);
+	    appServerIngressPath.setPathType("Prefix");
+
+	    IngressBackend appServerBackend = new IngressBackend();
+	    appServerIngressPath.setBackend(appServerBackend);
+
+	    IngressServiceBackend appServerServiceBackend = new IngressServiceBackend();
+	    appServerBackend.setService(appServerServiceBackend);
+	    appServerServiceBackend.setName(serviceToUse.get().getMetadata().getName());
+
+	    ServiceBackendPort appServerServiceBackendPort = new ServiceBackendPort();
+	    appServerServiceBackend.setPort(appServerServiceBackendPort);
+	    appServerServiceBackendPort.setNumber(appDefinition.getSpec().getPort());
 	});
 	return host + path + "/";
     }

@@ -80,6 +80,9 @@ public class AppDefinitionSpec {
     @JsonProperty("mountPath")
     private String mountPath;
 
+    @JsonProperty("appServerPort")
+    private int appServerPort;
+
     public String getName() {
 	return name;
     }
@@ -152,6 +155,10 @@ public class AppDefinitionSpec {
 	return mountPath;
     }
 
+    public int getAppServerPort() {
+	return appServerPort;
+    }
+
     @Override
     public String toString() {
 	return "AppDefinitionSpec [name=" + name + ", image=" + image + ", imagePullPolicy=" + imagePullPolicy
@@ -159,7 +166,7 @@ public class AppDefinitionSpec {
 		+ ingressname + ", minInstances=" + minInstances + ", maxInstances=" + maxInstances + ", timeout="
 		+ timeout + ", requestsMemory=" + requestsMemory + ", requestsCpu=" + requestsCpu + ", limitsMemory="
 		+ limitsMemory + ", limitsCpu=" + limitsCpu + ", downlinkLimit=" + downlinkLimit + ", uplinkLimit="
-		+ uplinkLimit + ", mountPath=" + mountPath + "]";
+		+ uplinkLimit + ", mountPath=" + mountPath + ", appServerPort=" + appServerPort + "]";
     }
 
     public static class Timeout {

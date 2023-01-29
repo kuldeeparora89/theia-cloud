@@ -16,6 +16,10 @@ spec:
       port: placeholder-port
       protocol: TCP
       targetPort: placeholder-port
+    - name: addon
+      port: placeholder-appserver-port
+      protocol: TCP
+      targetPort: placeholder-appserver-port
   selector:
     app: placeholder-app
   type: ClusterIP

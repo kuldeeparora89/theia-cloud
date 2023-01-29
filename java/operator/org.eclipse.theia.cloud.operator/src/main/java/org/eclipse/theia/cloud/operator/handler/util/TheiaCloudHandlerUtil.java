@@ -41,6 +41,7 @@ public final class TheiaCloudHandlerUtil {
     public static final String PLACEHOLDER_NAMESPACE = "placeholder-namespace";
     public static final String PLACEHOLDER_APP = "placeholder-app";
     public static final String PLACEHOLDER_PORT = "placeholder-port";
+    public static final String PLACEHOLDER_APPSERVER_PORT = "placeholder-appserver-port";
     public static final String PLACEHOLDER_EMAILSCONFIGNAME = "placeholder-emailsconfigname";
     public static final String PLACEHOLDER_CONFIGNAME = "placeholder-configname";
 

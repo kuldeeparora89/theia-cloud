@@ -16,6 +16,7 @@
 package org.eclipse.theia.cloud.operator.handler.impl;
 
 import static org.eclipse.theia.cloud.operator.handler.util.TheiaCloudHandlerUtil.PLACEHOLDER_APP;
+import static org.eclipse.theia.cloud.operator.handler.util.TheiaCloudHandlerUtil.PLACEHOLDER_APPSERVER_PORT;
 import static org.eclipse.theia.cloud.operator.handler.util.TheiaCloudHandlerUtil.PLACEHOLDER_CONFIGNAME;
 import static org.eclipse.theia.cloud.operator.handler.util.TheiaCloudHandlerUtil.PLACEHOLDER_EMAILSCONFIGNAME;
 import static org.eclipse.theia.cloud.operator.handler.util.TheiaCloudHandlerUtil.PLACEHOLDER_NAMESPACE;
@@ -92,6 +93,7 @@ public class DefaultDeploymentTemplateReplacements implements DeploymentTemplate
 	appDefinitionData.put(PLACEHOLDER_IMAGE_PULL_POLICY,
 		orDefault(appDefinition.getSpec().getImagePullPolicy(), DEFAULT_IMAGE_PULL_POLICY));
 	appDefinitionData.put(PLACEHOLDER_PORT, String.valueOf(appDefinition.getSpec().getPort()));
+	appDefinitionData.put(PLACEHOLDER_APPSERVER_PORT, String.valueOf(appDefinition.getSpec().getAppServerPort()));
 	appDefinitionData.put(PLACEHOLDER_CPU_LIMITS, orEmpty(appDefinition.getSpec().getLimitsCpu()));
 	appDefinitionData.put(PLACEHOLDER_MEMORY_LIMITS, orEmpty(appDefinition.getSpec().getLimitsMemory()));
 	appDefinitionData.put(PLACEHOLDER_CPU_REQUESTS, orEmpty(appDefinition.getSpec().getRequestsCpu()));

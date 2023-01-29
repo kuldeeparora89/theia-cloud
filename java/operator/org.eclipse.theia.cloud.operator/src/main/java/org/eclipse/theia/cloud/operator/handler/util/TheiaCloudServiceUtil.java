@@ -79,12 +79,14 @@ public final class TheiaCloudServiceUtil {
 	return replacements;
     }
 
-    public static Map<String, String> getServiceReplacements(String namespace, Session session, int port) {
+    public static Map<String, String> getServiceReplacements(String namespace, Session session, int port,
+	    int appServerPort) {
 	Map<String, String> replacements = new LinkedHashMap<String, String>();
 	replacements.put(PLACEHOLDER_SERVICENAME, getServiceName(session));
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APP, TheiaCloudHandlerUtil.getAppSelector(session));
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_NAMESPACE, namespace);
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_PORT, String.valueOf(port));
+	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APPSERVER_PORT, String.valueOf(appServerPort));
 	return replacements;
     }
 
