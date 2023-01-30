@@ -71,6 +71,8 @@ public final class TheiaCloudServiceUtil {
     public static Map<String, String> getServiceReplacements(String namespace, AppDefinition appDefinition,
 	    int instance) {
 	Map<String, String> replacements = new LinkedHashMap<String, String>();
+	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APPSERVER_PORT,
+		String.valueOf(appDefinition.getSpec().getAppServerPort()));
 	replacements.put(PLACEHOLDER_SERVICENAME, getServiceName(appDefinition, instance));
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APP,
 		TheiaCloudHandlerUtil.getAppSelector(appDefinition, instance));
@@ -82,11 +84,11 @@ public final class TheiaCloudServiceUtil {
     public static Map<String, String> getServiceReplacements(String namespace, Session session, int port,
 	    int appServerPort) {
 	Map<String, String> replacements = new LinkedHashMap<String, String>();
+	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APPSERVER_PORT, String.valueOf(appServerPort));
 	replacements.put(PLACEHOLDER_SERVICENAME, getServiceName(session));
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APP, TheiaCloudHandlerUtil.getAppSelector(session));
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_NAMESPACE, namespace);
 	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_PORT, String.valueOf(port));
-	replacements.put(TheiaCloudHandlerUtil.PLACEHOLDER_APPSERVER_PORT, String.valueOf(appServerPort));
 	return replacements;
     }
 

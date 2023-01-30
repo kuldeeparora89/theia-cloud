@@ -395,6 +395,9 @@ public class LazySessionHandler implements SessionHandler {
 	    ingressServiceBackend.setPort(serviceBackendPort);
 	    serviceBackendPort.setNumber(appDefinition.getSpec().getPort());
 
+	    IngressRule appServerIngressRule = new IngressRule();
+	    ingressToUpdate.getSpec().getRules().add(appServerIngressRule);
+
 	    HTTPIngressPath appServerIngressPath = new HTTPIngressPath();
 	    http.getPaths().add(appServerIngressPath);
 	    appServerIngressPath.setPath(path + AddedHandlerUtil.APPSERVER_REWRITE_PATH);

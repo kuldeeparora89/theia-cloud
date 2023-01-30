@@ -34,6 +34,8 @@ spec:
                   type: integer
                 port:
                   type: integer
+                appServerPort:
+                  type: integer
                 host:
                   type: string
                 ingressname:
@@ -83,6 +85,8 @@ spec:
                   type: integer
                 port:
                   type: integer
+                appServerPort:
+                  type: integer
                 host:
                   type: string
                 ingressname:
@@ -124,6 +128,8 @@ spec:
                 uid:
                   type: integer
                 port:
+                  type: integer
+                appServerPort:
                   type: integer
                 host:
                   type: string

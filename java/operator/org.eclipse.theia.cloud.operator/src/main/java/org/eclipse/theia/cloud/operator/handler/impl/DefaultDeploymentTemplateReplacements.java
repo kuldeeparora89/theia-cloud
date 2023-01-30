@@ -88,12 +88,12 @@ public class DefaultDeploymentTemplateReplacements implements DeploymentTemplate
 
     protected Map<String, String> getAppDefinitionData(AppDefinition appDefinition) {
 	Map<String, String> appDefinitionData = new LinkedHashMap<String, String>();
+	appDefinitionData.put(PLACEHOLDER_APPSERVER_PORT, String.valueOf(appDefinition.getSpec().getAppServerPort()));
 	appDefinitionData.put(PLACEHOLDER_APPDEFINITIONNAME, appDefinition.getSpec().getName());
 	appDefinitionData.put(PLACEHOLDER_IMAGE, appDefinition.getSpec().getImage());
 	appDefinitionData.put(PLACEHOLDER_IMAGE_PULL_POLICY,
 		orDefault(appDefinition.getSpec().getImagePullPolicy(), DEFAULT_IMAGE_PULL_POLICY));
 	appDefinitionData.put(PLACEHOLDER_PORT, String.valueOf(appDefinition.getSpec().getPort()));
-	appDefinitionData.put(PLACEHOLDER_APPSERVER_PORT, String.valueOf(appDefinition.getSpec().getAppServerPort()));
 	appDefinitionData.put(PLACEHOLDER_CPU_LIMITS, orEmpty(appDefinition.getSpec().getLimitsCpu()));
 	appDefinitionData.put(PLACEHOLDER_MEMORY_LIMITS, orEmpty(appDefinition.getSpec().getLimitsMemory()));
 	appDefinitionData.put(PLACEHOLDER_CPU_REQUESTS, orEmpty(appDefinition.getSpec().getRequestsCpu()));
